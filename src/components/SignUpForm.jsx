@@ -5,7 +5,7 @@ import "@fontsource/roboto/700.css";
 import { useState } from "react";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
-function SignUpForm() {
+function SignUpForm(props) {
   const [isLoginForm, setIsLoginForm] = useState(true);
 
   const handleLogin = () => {
@@ -16,7 +16,7 @@ function SignUpForm() {
   };
 
   return isLoginForm ? (
-    <LoginForm handleRegister={handleRegister} />
+    <LoginForm setUser={props.setUser} handleRegister={handleRegister} />
   ) : (
     <RegisterForm handleLogin={handleLogin} />
   );

@@ -19,6 +19,14 @@ function LoginForm(props) {
     setPass(e.target.value);
   };
 
+  const handleLoginClick = ()=>{
+    if(data==='admin'&&pass==='123'){
+      props.setUser({name:data})
+    }else{
+      console.error('Unknow user')
+    }
+  }
+
   return (
     <Stack sx={{ width: 350, gap: 2 }}>
       <Typography variant="h3" gutterBottom>
@@ -47,7 +55,7 @@ function LoginForm(props) {
         value={pass}
       />
 
-      <Button variant="contained">Войти</Button>
+      <Button onClick={handleLoginClick} variant="contained">Войти</Button>
     </Stack>
   );
 }
