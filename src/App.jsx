@@ -8,40 +8,87 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 function App() {
-  const [data, setData] = useState('');
-  const [pass, setPass] = useState('');
-
-  console.log(data);
+  const [isLoginForm, setIsLoginForm] = useState(true);
+  const [data, setData] = useState("");
+  const [pass, setPass] = useState("");
 
   const handleLogin = () => {
-    setData(Date.now());
+    setIsLoginForm(true);
+  };
+  const handleRegister = () => {
+    setIsLoginForm(false);
   };
 
-  const handleChangeLogin = (e)=>{ setData(e.target.value)}
-  const handleChangePassword = (e)=>{ setPass(e.target.value)}
+  const handleChangeLogin = (e) => {
+    setData(e.target.value);
+  };
+  const handleChangePassword = (e) => {
+    setPass(e.target.value);
+  };
 
   return (
     <Stack sx={{ alignItems: "center" }}>
-      <Stack sx={{ width: 350, gap: 2 }}>
-        <Typography variant="h3" gutterBottom>
-          Вход в сервис {data}
-        </Typography>
+      {isLoginForm ? (
+        <Stack sx={{ width: 350, gap: 2 }}>
+          <Typography variant="h3" gutterBottom>
+            Вход в сервис
+          </Typography>
+          <Typography variant="subtitle1" gutterBottom>
+            Нет учетной записи?
+          </Typography>
+          <Button onClick={handleRegister} variant="text">
+            Зарегестрироваться
+          </Button>
+          <TextField
+            id="login"
+            label="Login"
+            variant="standard"
+            onChange={handleChangeLogin}
+            value={data}
+          />
 
-        <TextField id="login" label="Login" variant="standard" onChange={handleChangeLogin} value={data}/>
+          <TextField
+            id="password"
+            label="Password"
+            variant="standard"
+            type="password"
+            onChange={handleChangePassword}
+            value={pass}
+          />
 
-        <TextField
-          id="password"
-          label="Password"
-          variant="standard"
-          type="password"
-          onChange={handleChangePassword}
-          value={pass}
-        />
+          <Button variant="contained">Войти</Button>
+        </Stack>
+      ) : (
+        <Stack sx={{ width: 350, gap: 2 }}>
+          <Typography variant="h3" gutterBottom>
+            Регестрация в сервисе
+          </Typography>
+          <Typography variant="subtitle1" gutterBottom>
+            Есть учетная запись?
+          </Typography>
+          <Button onClick={handleLogin} variant="text">
+            Войти
+          </Button>
+          <TextField
+            id="login"
+            label="Login"
+            variant="standard"
+            onChange={handleChangeLogin}
+            value={data}
+          />
 
-        <Button onClick={handleLogin} variant="contained">
-          Войти
-        </Button>
-      </Stack>
+          <TextField
+            id="password"
+            label="Password"
+            variant="standard"
+            type="password"
+            onChange={handleChangePassword}
+            value={pass}
+          />
+
+          <Button variant="contained">Регестрация</Button>
+        </Stack>
+      )}
     </Stack>
   );
 }
