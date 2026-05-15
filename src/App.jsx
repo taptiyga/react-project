@@ -5,14 +5,18 @@ import "@fontsource/roboto/700.css";
 import Stack from "@mui/material/Stack";
 import SignUpForm from "./components/SignUpForm";
 import { useState } from "react";
+import Homepage from "./components/Home/Homepage";
 
 function App() {
-const [user,setUser] = useState() 
+  const [user, setUser] = useState();
 
   return (
     <Stack sx={{ alignItems: "center" }}>
-      {user?<div>{user.name}</div>:
-      <SignUpForm setUser={setUser}/>}
+      {user ? (
+        <Homepage username={user.name} />
+      ) : (
+        <SignUpForm setUser={setUser} />
+      )}
     </Stack>
   );
 }
